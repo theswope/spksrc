@@ -1,0 +1,12 @@
+--- configure.ac.orig	2017-12-27 09:08:38.303013000 +0000
++++ configure.ac	2018-01-05 13:57:05.452048000 +0000
+@@ -37,6 +37,9 @@
+ 	fi
+         AC_MSG_RESULT($interp)
+ 	PYTHON_FOR_BUILD='_PYTHON_PROJECT_BASE=$(abs_builddir) _PYTHON_HOST_PLATFORM=$(_PYTHON_HOST_PLATFORM) PYTHONPATH=$(shell test -f pybuilddir.txt && echo $(abs_builddir)/`cat pybuilddir.txt`:)$(srcdir)/Lib:$(srcdir)/Lib/$(PLATDIR) '$interp
++	else
++		PYTHON_FOR_BUILD='_PYTHON_PROJECT_BASE=$(abs_builddir) _PYTHON_HOST_PLATFORM=$(_PYTHON_HOST_PLATFORM) PYTHONPATH='$PYTHON_LIB_NATIVE' '$PYTHON_FOR_BUILD
++		AC_MSG_RESULT($PYTHON_FOR_BUILD)
+     fi
+ elif test "$cross_compiling" = maybe; then
+     AC_MSG_ERROR([Cross compiling required --host=HOST-TUPLE and --build=ARCH])
