@@ -7,7 +7,7 @@ if: tag IS present
 
 env:
   global:
-    - PKG=git
+    - PKG=sabnzbd
   matrix:
     - SYNOARCH=arch-rtd1296-6.1
     - SYNOARCH=arch-88f6281-6.1
