@@ -7,7 +7,7 @@ if: tag IS present
 
 env:
   global:
-    - PKG=sickrage
+    - PKG=couchpotatoserver
   matrix:
     - SYNOARCH=arch-rtd1296-6.1
 
