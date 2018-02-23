@@ -1,0 +1,33 @@
+# Travis config file to build spk package
+# Adapted from https://github.com/torrentalle/spksrc/tree/gogs-build
+# And https://github.com/jelmerj/spksrc
+
+# The build-matrix is filled via the API
+
+notifications:
+  email: false
+
+# The "sudo: required" image is fastest
+sudo: required
+dist: trusty
+
+# Travis needs the : syntax because "deep_merge" is broken!
+# https://github.com/travis-ci/travis-ci/issues/8655
+env:
+  global:
+    - PUBLISH_API_KEY: ThisIsVerySecret
+
+# Extract package to build from the tage
+# Output is too verbose for TravisCI, so we hide it
+# Remove the ">/dev/null" part to debug!
+# make arch-$SYNOARCH always return exit code 0.
+# The "ls" line is to test if SPK has been build.
+
+script:
+  - make setup-synocommunity
+  - cat local.mk
+  - docker pull synocommunity/spksrc
+  - docker run -it -v `pwd`:/spksrc synocommunity/spksrc /bin/bash -c "cd /spksrc && cd spk/$PKG && make publish-arch-$SYNOARCH>/dev/null"
+
+services:
+  - docker

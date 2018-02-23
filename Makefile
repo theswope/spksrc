@@ -105,7 +105,8 @@ setup: local.mk dsm-6.1
 local.mk:
 	@echo "Creating local configuration \"local.mk\"..."
 	@echo "PUBLISH_URL=" > $@
-	@echo "PUBLISH_API_KEY=" >> $@
+	@echo "PUBLISH_API_KEY=$(PUBLISH_API_KEY)" >> $@
+	@echo "TRAVIS_API_KEY=" > $@
 	@echo "MAINTAINER?=" >> $@
 	@echo "MAINTAINER_URL=" >> $@
 	@echo "DISTRIBUTOR=" >> $@

@@ -439,6 +439,28 @@ publish-arch-%:
 	@$(MSG) Building and publishing package for arch $*
 	-@MAKEFLAGS= $(MAKE) ARCH=$(basename $(subst -,.,$(basename $(subst .,,$*)))) TCVERSION=$(if $(findstring $*,$(basename $(subst -,.,$(basename $(subst .,,$*))))),$(DEFAULT_TC),$(notdir $(subst -,/,$*))) publish
 
+###
+
+publish-travis-all-supported:
+	@$(MSG) Triggering Travis to publish all supported archs
+	$(eval TCVERSION=$(if $(findstring $*,$(basename $(subst -,.,$(basename $(subst .,,$*))))),$(DEFAULT_TC),$(notdir $(subst -,/,$*))))
+	@if $(MAKE) kernel-required >/dev/null 2>&1 ; then \
+		python ../../request_travis.py $(shell basename $(CURDIR)) $(TRAVIS_API_KEY) $(addsuffix $(TCVERSION), $(sort $(basename $(subst -,.,$(basename $(subst .,,$(ARCHS_DUPES))))))) ; \
+	else \
+		python ../../request_travis.py $(shell basename $(CURDIR)) $(TRAVIS_API_KEY) $(addsuffix $(TCVERSION), $(sort $(basename $(subst -,.,$(basename $(subst .,,$(ARCHS_NO_KRNLSUPP))))))) ; \
+	fi
+
+publish-travis-latest-arch-%:
+	@$(MSG) Triggering travis to publish arch $* with latest available toolchain
+	$(eval TCVERSION=$(notdir $(subst -,/,$(sort $(filter %$(lastword $(notdir $(subst -,/,$(sort $(filter $*%, $(AVAILABLE_ARCHS)))))),$(sort $(filter $*%, $(AVAILABLE_ARCHS))))))))
+	@python ../../request_travis.py $(shell basename $(CURDIR)) $(TRAVIS_API_KEY) $(addsuffix $(TCVERSION), $(basename $(subst -,.,$*)))
+
+publish-travis-arch-%:
+	@$(MSG) Triggering Travis for arch $*
+	$(eval TCVERSION=$(if $(findstring $*,$(basename $(subst -,.,$(basename $(subst .,,$*))))),$(DEFAULT_TC),$(notdir $(subst -,/,$*))))
+	@python ../../request_travis.py $(shell basename $(CURDIR)) $(TRAVIS_API_KEY) $(addsuffix $(TCVERSION), $(basename $(subst -,.,$(basename $(subst .,,$*)))))
+
+
 ####
 
 changelog:
