@@ -13,6 +13,7 @@ LICENSE  = PSF
 
 GNU_CONFIGURE = 1
 CONFIGURE_ARGS = --enable-unicode=ucs4 --enable-ipv6
+COMPILE_MAKE_OPTIONS = -j4
 
 POST_INSTALL_TARGET = myPostInstall
 

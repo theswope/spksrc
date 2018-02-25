@@ -24,6 +24,7 @@ POST_PATCH_TARGET = myPostPatch
 PRE_CONFIGURE_TARGET = myPreConfigure
 PRE_INSTALL_TARGET = myPreInstall
 POST_INSTALL_TARGET = myPostInstall
+COMPILE_MAKE_OPTIONS = -j4
 
 include ../../mk/spksrc.cross-cc.mk
 
