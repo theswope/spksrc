@@ -7,8 +7,16 @@ if: tag IS present
 
 # Matrix identical to `all-supported`
 env:
-  matrix:
+  global:
     - SYNOARCH=arch-x64-6.1
+  matrix:
+    - PKG=headphones
+    - PKG=headphones-custom
+    - PKG=plexpy-custom
+    - PKG=sickrage
+    - PKG=couchpotatoserver
+    - PKG=couchpotatoserver-custom
+    - PKG=lazylibrarian
     # - SYNOARCH=arch-x64-5.2
     # - SYNOARCH=arch-88f6281-6.1
     # - SYNOARCH=arch-alpine-6.1
@@ -39,7 +47,7 @@ dist: trusty
 # The "ls" line is to test if SPK has been build.
 
 script:
-  - PKG=${TRAVIS_TAG%%-*}
+  #- PKG=${TRAVIS_TAG%%-*}
   - docker pull synocommunity/spksrc
   - docker run -it -v `pwd`:/spksrc synocommunity/spksrc /bin/bash -c "cd /spksrc && make setup && cd spk/$PKG && make $SYNOARCH -j4>/dev/null"
   - ls packages/*.spk
