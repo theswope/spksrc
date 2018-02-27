@@ -40,6 +40,7 @@ dist: trusty
 
 script:
   - PKG=${TRAVIS_TAG%%-*}
+  - PKG=nzbget-testing
   - docker pull synocommunity/spksrc
   - docker run -it -v `pwd`:/spksrc synocommunity/spksrc /bin/bash -c "cd /spksrc && make setup && cd spk/$PKG && make $SYNOARCH>/dev/null"
   - ls packages/*.spk
