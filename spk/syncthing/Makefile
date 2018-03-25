@@ -25,6 +25,11 @@ SERVICE_SETUP = src/service-setup.sh
 SERVICE_PORT = 7070
 SERVICE_PORT_TITLE = $(DISPLAY_NAME)
 
+
+# Add special options to start-stop-daemon command
+SERVICE_OPTIONS = "$${SYNCTHING_OPTIONS}"
+SERVICE_EXE="env HOME=$${CONFIG_DIR} $${SYNCTHING}"
+
 # Admin link for in DSM UI
 ADMIN_PORT = $(SERVICE_PORT)
 

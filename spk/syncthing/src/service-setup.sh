@@ -9,10 +9,6 @@ if [ -f ${CONFIG_DIR}/options.conf ]; then
     source ${CONFIG_DIR}/options.conf
 fi
 
-# Add special options to start-stop-daemon command
-SERVICE_OPTIONS = SYNCTHING_OPTIONS
-SERVICE_EXE="env HOME=${CONFIG_DIR} ${SYNCTHING}"
-
 LEGACY_GROUP="users"
 
 service_postinst ()

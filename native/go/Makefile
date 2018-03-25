@@ -22,7 +22,11 @@ include ../../mk/spksrc.native-cc.mk
 myComp:
 	@$(MSG) "Building Go"
 	cd $(WORK_DIR)/$(PKG_NAME)/src && export GOARCH=amd64 && GOROOT_BOOTSTRAP=$(GOROOT_BOOTSTRAP) ./make.bash
-	@$(MSG) "Building Go for arm"
+	@$(MSG) "Building Go for arm-v5"
 	cd $(WORK_DIR)/$(PKG_NAME)/src && export GOARCH=arm && export GOARM=5 && GOROOT_BOOTSTRAP=$(GOROOT_BOOTSTRAP) ./make.bash --no-clean
+	@$(MSG) "Building Go for arm-v7"
+	cd $(WORK_DIR)/$(PKG_NAME)/src && export GOARCH=arm && export GOARM=5 && GOROOT_BOOTSTRAP=$(GOROOT_BOOTSTRAP) ./make.bash --no-clean
+	@$(MSG) "Building Go for arm64"
+	cd $(WORK_DIR)/$(PKG_NAME)/src && export GOARCH=arm64 && GOROOT_BOOTSTRAP=$(GOROOT_BOOTSTRAP) ./make.bash --no-clean
 	@$(MSG) "Building Go for 386"
 	cd $(WORK_DIR)/$(PKG_NAME)/src && export GOARCH=386 && GOROOT_BOOTSTRAP=$(GOROOT_BOOTSTRAP) ./make.bash --no-clean
