@@ -27,8 +27,8 @@ SERVICE_PORT_TITLE = $(DISPLAY_NAME)
 
 
 # Add special options to start-stop-daemon command
-SERVICE_OPTIONS = $${SYNCTHING_OPTIONS}
-SERVICE_EXE= env HOME=$${CONFIG_DIR} $${SYNCTHING}
+SERVICE_EXE="env HOME=$${SYNOPKG_PKGDEST}/var $${SYNOPKG_PKGDEST}/bin/syncthing"
+SERVICE_OPTIONS="-home=$${SYNOPKG_PKGDEST}/var"
 
 # Admin link for in DSM UI
 ADMIN_PORT = $(SERVICE_PORT)
